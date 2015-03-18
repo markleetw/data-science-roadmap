@@ -7,9 +7,9 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
   for(i in id[id >= 1 & id <= 332]) { # loop start
     
     # convert id to file name
-    if(str_length(i) == 1) {
+    if(nchar(i) == 1) {
       fileName <- paste("00", i, ".csv", sep = "")
-    } else if(str_length(i) == 2) {
+    } else if(nchar(i) == 2) {
       fileName <- paste("0", i, ".csv", sep = "")
     } else {
       fileName <- paste(i, ".csv", sep = "")
@@ -20,16 +20,13 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
     
     # merge all selected files to one data.frame
     if(exists("selectedData")) {
-      selectedData <- merge(selectedData, iCsv, all = T)
+      selectedData <- append(selectedData, iCsv[[pollutant]])
     } else {
-      selectedData <- iCsv
+      selectedData <- iCsv[[pollutant]]
     }
     
   } # loop end
   
-  # get pollutant data from data.frame
-  pollutantData <- selectedData[[pollutant]]
-  
   # calculate mean value from non-NA data, and rounding 3 digits
-  round(mean(pollutantData[!is.na(pollutantData)]), digits = 3)
+  round(mean(selectedData[!is.na(selectedData)]), digits = 3)
 }
