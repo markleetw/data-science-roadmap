@@ -28,6 +28,6 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
   } # loop end
   
   # calculate mean value from non-NA data, and rounding 3 digits
-  round(mean(selectedData[!is.na(selectedData)]), digits = 3)
+  round(mean(selectedData, na.rm = TRUE), digits = 3)
   
 }
