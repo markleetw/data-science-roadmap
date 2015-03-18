@@ -18,7 +18,7 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
     # read file to data.frame
     iCsv <- read.csv(paste(directory, fileName, sep = "//"))
     
-    # merge all selected files to one data.frame
+    # merge all selected data into one vector
     if(exists("selectedData")) {
       selectedData <- append(selectedData, iCsv[[pollutant]])
     } else {
@@ -29,4 +29,5 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
   
   # calculate mean value from non-NA data, and rounding 3 digits
   round(mean(selectedData[!is.na(selectedData)]), digits = 3)
+  
 }
