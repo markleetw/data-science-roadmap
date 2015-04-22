@@ -10,12 +10,12 @@ pollutantmean <- function(directory, pollutant, id = 1:332) {
         
         # merge all selected data into one vector
         if(exists("selectedData")) {
-            selectedData <- append(selectedData, iCsv[[pollutant]])
+            selectedData <- c(selectedData, iCsv[[pollutant]])
         } else {
             selectedData <- iCsv[[pollutant]]
         }
         
     } # loop end
     
-    round(mean(selectedData, na.rm = TRUE), digits = 3)
+    return(mean(selectedData, na.rm = TRUE))
 }
