@@ -1,33 +1,21 @@
 pollutantmean <- function(directory, pollutant, id = 1:332) {
-  
-  # remove variable if exists
-  if(exists("selectedData"))
-    rm(selectedData)
-  
-  for(i in id[id >= 1 & id <= 332]) { # loop start
+    source("getDataFrameFromId.R")
     
-    # convert id to file name
-    if(nchar(i) == 1) {
-      fileName <- paste("00", i, ".csv", sep = "")
-    } else if(nchar(i) == 2) {
-      fileName <- paste("0", i, ".csv", sep = "")
-    } else {
-      fileName <- paste(i, ".csv", sep = "")
-    }
+    # remove variable if exists
+    if(exists("selectedData"))
+        rm(selectedData)
     
-    # read file to data.frame
-    iCsv <- read.csv(paste(directory, fileName, sep = "//"))
+    for(i in id[id >= 1 & id <= 332]) { # loop start
+        iCsv <- getDataFrameFromId(directory, i)
+        
+        # merge all selected data into one vector
+        if(exists("selectedData")) {
+            selectedData <- append(selectedData, iCsv[[pollutant]])
+        } else {
+            selectedData <- iCsv[[pollutant]]
+        }
+        
+    } # loop end
     
-    # merge all selected data into one vector
-    if(exists("selectedData")) {
-      selectedData <- append(selectedData, iCsv[[pollutant]])
-    } else {
-      selectedData <- iCsv[[pollutant]]
-    }
-    
-  } # loop end
-  
-  # calculate mean value from non-NA data, and rounding 3 digits
-  round(mean(selectedData, na.rm = TRUE), digits = 3)
-  
+    round(mean(selectedData, na.rm = TRUE), digits = 3)
 }
