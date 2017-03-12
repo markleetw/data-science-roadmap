@@ -1,6 +1,16 @@
-# Data-Science
-Coursera Notes: Johns Hopkins University – Data Science
+Personal notes and materials for data science courses/conferences
 
-# Note of Learning R
-這是我學習 R 語言時所做的筆記(正體中文)，主要是參考 O'Reilly 所出版的 Learning R 一書。
+--
 
+### jhu_data_science
+Coursera specialization - Data Science (Johns Hopkins University)
+
+--
+
+### learning_r
+Study notes for **Learning R** (published by **O'Reilly**).
+
+--
+
+### build_trading_business_with_r
+[台灣資料科學年會](http://datasci.tw/) - 使用 R 建立自己的演算法交易事業(吳牧恩 Mu-en Wu)
